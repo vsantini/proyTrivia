@@ -1,6 +1,7 @@
 # importamos la instancia de la BD
 from apptrivia import db
 from werkzeug.security import generate_password_hash, check_password_hash
+from flask_login import UserMixin
 
 class Categoria(db.Model):
     __tablename__ = 'categoria'
@@ -37,19 +38,37 @@ class Respuesta(db.Model):
         return f'<Respuesta {self.text}>'
 
 
-class Usuario(db.Model):
-    __tablename__ = 'usuario'
+
+class User(db.Model, UserMixin):
+    __tablename__ = 'trivia_user'
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(32), nullable=False)
-    email = db.Column(db.String(64), nullable=False, unique=True)
+    name = db.Column(db.String(80), nullable=False)
+    email = db.Column(db.String(256), unique=True, nullable=False)
     password = db.Column(db.String(128), nullable=False)
-    admin = db.Column(db.Boolean)
-
-    def set_password(self,password):
-        self.password = generate_password_hash(password)
-
-    def check_password(self,password):
-        return check_password_hash(self.password,password)
+    is_admin = db.Column(db.Boolean, default=False)
 
     def __repr__(self):
-        return f'<Usuario {self.name} Email: {self.email}>'
+        return '<User {} - Email {}>'.format(self.name, self.email)
+
+   
+    def set_password(self, password):
+        self.password = generate_password_hash(password)
+
+    def check_password(self, password):
+        return check_password_hash(self.password, password)
+
+    def save(self):
+        if not self.id:
+            db.session.add(self)
+        db.session.commit()
+
+
+    @staticmethod
+    def get_by_id(id):
+        return User.query.get(id)
+
+    @staticmethod
+    def get_by_email(email):
+        return User.query.filter_by(email=email).first()
+
+

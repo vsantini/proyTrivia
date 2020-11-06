@@ -1,0 +1,6 @@
+ok 1) crear los form de loggin y registro
+ok2) crear las templates asociadas
+ok -> 3) crear el modelo User
+4) crear la rutas para registro y login
+5) asegurar las demás rutas para que solo pueda accederse estando loggeados
+6) modificar en apptrivia la forma de acceder a cada modelo del Admin

@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 from apptrivia import db
-from models.models import Categoria, Pregunta,Usuario, Respuesta
+from models.models import Categoria, Pregunta, User, Respuesta
 
 db.drop_all()
 db.create_all()
@@ -29,8 +29,22 @@ r_Mundial1 = Respuesta(text="Argentina",pregunta=q_Mundial,resultado=False)
 r_Mundial2 = Respuesta(text="Chile",pregunta=q_Mundial,resultado=True)
 r_Mundial3 = Respuesta(text="Brasil",pregunta=q_Mundial,resultado=False)
 
+#Usuarios
+q_u1 = User(name = "valeria", email = "vsantini@antel.com.uy", is_admin = True)
+# el pass lo seteamos con el método set_password para que se guarde con hash
+q_u1.set_password("admin1");
+# por defecto, el usuario no es admin
+q_u2 = User(name = "juan", email = "juan@antel.com.uy")
+q_u2.set_password("juan");
+
 db.session.add(c_geogra)
 db.session.add(c_deporte)
+
+
+
+db.session.add(q_u1)
+db.session.add(q_u2)
+db.session.commit()
 
 #db.session.add(q_Laos)
 #db.session.add(q_Armenia)
@@ -50,7 +64,3 @@ for c in categorias:
 cat = Categoria.query.get(1)
 print(cat)
 
-#Creo un usuario administrador
-admin = Usuario(name="Administrador",email="admin@app.com",admin=True,password="passwd")
-db.session.add(admin)
-db.session.commit()

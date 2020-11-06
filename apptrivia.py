@@ -27,7 +27,7 @@ db = SQLAlchemy(app)
 
 # rutas disponibles
 from routes import *
-from models.models import Categoria, Pregunta,Usuario, Respuesta
+from models.models import Categoria, Pregunta,User, Respuesta
 
 # Los modelos que queremos mostrar en el admin
 admin.add_view(ModelView(Categoria, db.session))
@@ -35,7 +35,7 @@ admin.add_view(ModelView(Pregunta, db.session))
 admin.add_view(ModelView(Respuesta, db.session))
 
 #Agrego el modelo Usuario al Flask Admin
-admin.add_view(ModelView(Usuario, db.session))
+admin.add_view(ModelView(User, db.session))
 
 # subimos el server (solo cuando se llama directamente a este archivo)
 if __name__ == '__main__':

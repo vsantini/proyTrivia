@@ -1,6 +1,10 @@
 <!-- <link rel="stylesheet" href="estilo.css">
 -->
 <div class="cabezal"> Trivia: <a href="/">Inicio</a>
+{%  if current_user.is_authenticated:%}
+    <div align="right"> Usuario logueado: {{current_user.name}} </div>
+{%  endif %}
+
 </div>
 <hr>
 
@@ -13,7 +17,6 @@
           </ul>
           {% endif %}
 {% endwith %}
-
 
 {% block content %}{% endblock %}
 
