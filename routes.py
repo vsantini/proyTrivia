@@ -25,7 +25,6 @@ def index():
 @app.route('/trivia/login', methods=['GET', 'POST'])
 def login():
     if current_user.is_authenticated:
-        
         return redirect(url_for('mostrarcategorias'))
     form = LoginForm()
     if form.validate_on_submit():
@@ -96,3 +95,27 @@ def todasCatOk():
 def load_user(user_id):
     return User.get_by_id(int(user_id))
 
+@app.route("/trivia/register", methods=["GET", "POST"])
+def register():
+    if current_user.is_authenticated:
+        return redirect(url_for('index'))
+    form = RegisterForm()
+    error = None
+    if form.validate_on_submit():
+        username = form.username.data
+        email = form.email.data
+        password = form.password.data
+        # Comprobamos que no hay ya un usuario con ese email
+        user = User.get_by_email(email)
+        if user is not None:
+            flash('El email {} ya está siendo utilizado por otro usuario'.format(email))
+        else:
+            # Creamos el usuario y lo guardamos
+            user = User(name=username, email=email)
+            user.set_password(password)
+            user.save()
+            # Dejamos al usuario logueado
+            login_user(user, remember=True)
+            return redirect(url_for('index'))
+       
+    return render_template("register.html", form=form)
