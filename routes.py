@@ -44,7 +44,7 @@ def login():
     return render_template('login.html', form=form)
 
 
-
+@login_required
 @app.route('/trivia/categorias', methods=['GET'])
 def mostrarcategorias():
     categorias = Categoria.query.all()
@@ -57,7 +57,7 @@ def mostrarcategorias():
         session['ya_gano'] = False
     return render_template('categorias.html', categorias=categorias)
 
-
+@login_required
 @app.route('/trivia/<int:id_categoria>/pregunta', methods=['GET'])
 def mostrarpregunta(id_categoria):
     preguntas = Pregunta.query.filter_by(categoria_id=id_categoria).all()
@@ -66,7 +66,7 @@ def mostrarpregunta(id_categoria):
     categ = Categoria.query.get(id_categoria)
     return render_template('preguntas.html', categoria=categ, pregunta=pregunta)
 
-
+@login_required
 @app.route('/trivia/<int:id_pregunta>/resultado/<int:id_respuesta>', methods=['GET'])
 def mostrarrespuesta(id_pregunta, id_respuesta):
     pregunta =  Pregunta.query.get(id_pregunta)
@@ -117,5 +117,11 @@ def register():
             # Dejamos al usuario logueado
             login_user(user, remember=True)
             return redirect(url_for('index'))
-       
+
     return render_template("register.html", form=form)
+
+
+@app.route('/trivia/logout')
+def logout():
+    logout_user()
+    return redirect(url_for('index'))

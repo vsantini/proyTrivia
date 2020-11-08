@@ -1,10 +1,14 @@
 <!-- <link rel="stylesheet" href="estilo.css">
 -->
-<div class="cabezal"> Trivia: <a href="/">Inicio</a>
-{%  if current_user.is_authenticated:%}
-    <div align="right"> Usuario logueado: {{current_user.name}} </div>
-{%  endif %}
+<div class="cabezal"> trivia: <a href="/">inicio</a>
+    <div align="right">
+        {%  if current_user.is_anonymous:%}
+             <a href="{{url_for('index')}}">Iniciar session</a>
+        {% else %}
+            <a href="{{url_for('logout')}}">Cerrar Sesion </a> Usuario {{current_user.name}}
+        {%  endif %}
 
+    </div>
 </div>
 <hr>
 
