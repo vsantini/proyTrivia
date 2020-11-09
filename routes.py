@@ -125,3 +125,14 @@ def register():
 def logout():
     logout_user()
     return redirect(url_for('index'))
+
+##############################
+#            Errores:        #
+##############################
+@app.errorhandler(404)
+def page_not_found(e):
+    return render_template('404.html')
+
+
+
+
