@@ -1,10 +1,12 @@
 from apptrivia import app
-from flask import session
 import random, datetime
 from flask_login import LoginManager, current_user, login_user, login_required, logout_user
 
+from flask_principal import AnonymousIdentity, RoleNeed, UserNeed, identity_loaded, identity_changed, Identity
+
 from models.models import Categoria, Pregunta, Respuesta, User
-from flask import render_template, redirect, url_for, flash, request
+
+from flask import render_template, redirect, url_for, flash, request, session, jsonify, current_app, g
 
 from forms.login import LoginForm
 from forms.register import RegisterForm
@@ -32,6 +34,10 @@ def login():
         if user is not None and user.check_password(form.password.data):
             # funcion provista por Flask-Login, el segundo parametro gestion el "recordar"
             login_user(user, remember=form.remember_me.data)
+            #agrego a identity
+            app_actual = current_app._get_current_object()
+            identity_changed.send(app_actual, identity=Identity(user.id))
+
             next_page = request.args.get('next', None)
             if not next_page:
                 next_page = url_for('mostrarcategorias')
@@ -132,6 +138,30 @@ def logout():
 @app.errorhandler(404)
 def page_not_found(e):
     return render_template('404.html')
+
+
+
+##############################
+#            PRINCIPAL :     #
+##############################
+
+# Flask-Principal: Agregamos las necesidades a una identidad, una vez que se loguee el usuario.
+@identity_loaded.connect_via(app)
+def on_identity_loaded(sender, identity):
+    # Seteamos la identidad al usuario
+    identity.user = current_user
+
+    # Agregamos una UserNeed a la identidad, con el id del usuario actual.
+    if hasattr(current_user, 'id'):
+            identity.provides.add(UserNeed(current_user.id))
+
+    # Agregamos a la identidad la lista de roles que posee el usuario actual.
+    if hasattr(current_user, 'roles'):
+        for role in current_user.roles:
+            identity.provides.add(RoleNeed(role.rolename))
+
+
+
 
 
 
