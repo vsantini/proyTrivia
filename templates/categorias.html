@@ -1,6 +1,10 @@
-<body>
-{% extends "base.html" %}
-{% block content %}
+{% extends "base_alternativa.html" %}
+{% block head %}
+{{ super() }} {# Heredar el contenido del bloque padre #}
+<link rel="stylesheet" href="{{url_for('static',filename='css/style.css')}}">
+{% endblock %}
+
+{% block app_content %}
 <h1>Seleccione Categoria</h1>
 <br>
 <table border="0">
@@ -15,4 +19,28 @@
 <hr>
 <br>
 {% endblock %}
-</body>
+
+
+{% block contenido %}
+<div class="container">
+	<div class="row">
+		<div class="col-md-12">
+			<h2>{{subtitulo}}</h2>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-4">
+		<table border="0">
+   			{% for categoria in categorias %}
+				{% if session[categoria.id | string] %}
+					<tr><td>{{categoria.descripcion}}</td></tr>
+				{% else %}
+					<tr><td><a href="/trivia/{{categoria.id}}/pregunta">{{categoria.descripcion}}</a></td></tr>
+				{% endif %}
+   			{% endfor %}
+		</table>
+		</div>
+	</div>
+</div>
+</div>
+{% endblock %}

@@ -7,7 +7,7 @@ from flask_admin.contrib.sqla import ModelView
 from flask_migrate import Migrate
 from flask_principal import Principal, Permission, RoleNeed
 from flask_admin import AdminIndexView
-
+from flask_bootstrap import Bootstrap
 
 # instancia Flask
 app = Flask(__name__)
@@ -27,8 +27,7 @@ migrate = Migrate()
 # Se inicializa el objeto migrate
 migrate.init_app(app, db)
 
-
-
+bootstrap = Bootstrap(app)
 
 class MyModelView(ModelView):
     def is_accessible(self):

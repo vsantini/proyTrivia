@@ -1,0 +1,20 @@
+footer{
+  background-color: black;
+
+}
+
+
+footer ul{
+  list-style: none;
+  color:white;
+  padding:15px;
+}
+
+footer a, footer a:hover, footer a:visited{
+  color:white;
+}
+
+footer p{
+  padding:15px;
+  color: white;
+}

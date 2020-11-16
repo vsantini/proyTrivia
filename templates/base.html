@@ -1,5 +1,6 @@
-<!-- <link rel="stylesheet" href="estilo.css">
--->
+{% extends 'bootstrap/base.html' %}
+
+{% block content %}
 <div class="cabezal"> trivia: <a href="/">inicio</a>
     <div align="right">
         {%  if current_user.is_anonymous:%}
@@ -22,8 +23,9 @@
           {% endif %}
 {% endwith %}
 
-{% block content %}{% endblock %}
 
+        {% block app_content %}{% endblock %}
+{% endblock %}
 
 
 <style>

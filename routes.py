@@ -47,7 +47,7 @@ def login():
             flash('Usuario o contraseña inválido')
             return redirect(url_for('login'))
     # no loggeado, dibujamos el login con el form vacio
-    return render_template('login.html', form=form)
+    return render_template('login.html', form=form, subtitulo="Bienvenidos a la trivia!!", texto="Diviertanse!! Juegue con sus amigos")
 
 
 @login_required
@@ -61,7 +61,7 @@ def mostrarcategorias():
         for cat in categorias:
             session[str(cat.id)] = False
         session['ya_gano'] = False
-    return render_template('categorias.html', categorias=categorias)
+    return render_template('categorias.html', categorias=categorias, subtitulo="Seleccione categoria")
 
 @login_required
 @app.route('/trivia/<int:id_categoria>/pregunta', methods=['GET'])
