@@ -1,27 +1,25 @@
-<body>
-{% extends "base.html" %}
-{% block app_content %}
-<h1>Categoría {{categoria.nombre}}</h1>
+{% extends "base_alternativa.html" %}
+{% block head %}
+{{ super() }} {# Heredar el contenido del bloque padre #}
+<link rel="stylesheet" href="{{url_for('static',filename='css/style.css')}}">
+{% endblock %}
+
+{% block contenido %}
+
+<h1>Categoría: {{categoria.descripcion}}</h1>
 <br>
-<div style="text-align: center;">
-<h2><span
-style="font-weight: bold; background-color: rgb(147, 206, 222);">{{pregunta.text}}</span>
-</h2>
-    <table>
+
+<h2 align="center">{{pregunta.text}}</h2>
+
+    <table align="center">
         {% for respuesta in pregunta.respuestas %}
 
         <tr><td>
             <a href="/trivia/{{pregunta.id}}/resultado/{{respuesta.id}}">{{respuesta.text}}</a>
         </td></tr>
-
+         <br>
         {% endfor %}
     </table>
-
-    <br>
-<div style="text-align:center;">
-</div>
-<br>
-</div>
-<br>
+     <br> <br>
 {% endblock %}
-</body>
+

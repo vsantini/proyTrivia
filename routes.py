@@ -17,6 +17,7 @@ login_manager = LoginManager(app)
 
 
 @app.route('/')
+@app.route('/index')
 def index():
     session.clear()
 
@@ -50,8 +51,9 @@ def login():
     return render_template('login.html', form=form, subtitulo="Bienvenidos a la trivia!!", texto="Diviertanse!! Juegue con sus amigos")
 
 
-@login_required
+
 @app.route('/trivia/categorias', methods=['GET'])
+@login_required
 def mostrarcategorias():
     categorias = Categoria.query.all()
     #vengo de que gane
@@ -63,8 +65,9 @@ def mostrarcategorias():
         session['ya_gano'] = False
     return render_template('categorias.html', categorias=categorias, subtitulo="Seleccione categoria")
 
-@login_required
+
 @app.route('/trivia/<int:id_categoria>/pregunta', methods=['GET'])
+@login_required
 def mostrarpregunta(id_categoria):
     preguntas = Pregunta.query.filter_by(categoria_id=id_categoria).all()
     # elegir pregunta aleatoria pero de la categoria adecuada
@@ -72,8 +75,9 @@ def mostrarpregunta(id_categoria):
     categ = Categoria.query.get(id_categoria)
     return render_template('preguntas.html', categoria=categ, pregunta=pregunta)
 
-@login_required
+
 @app.route('/trivia/<int:id_pregunta>/resultado/<int:id_respuesta>', methods=['GET'])
+@login_required
 def mostrarrespuesta(id_pregunta, id_respuesta):
     pregunta =  Pregunta.query.get(id_pregunta)
     respuesta = Respuesta.query.get(id_respuesta)
@@ -139,6 +143,17 @@ def logout():
 def page_not_found(e):
     return render_template('404.html')
 
+@app.errorhandler(500)
+def servererror(e):
+    return render_template('500.html')
+
+@app.errorhandler(403)
+def authError(e):
+    return render_template('403.html')
+
+@app.errorhandler(401)
+def authError2(e):
+    return render_template('403.html')
 
 
 ##############################

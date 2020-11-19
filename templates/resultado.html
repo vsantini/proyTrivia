@@ -1,16 +1,18 @@
-<body>
-{% extends "base.html" %}
-{% block app_content %}
+{% extends "base_alternativa.html" %}
+{% block head %}
+{{ super() }} {# Heredar el contenido del bloque padre #}
+<link rel="stylesheet" href="{{url_for('static',filename='css/style.css')}}">
+{% endblock %}
+{% block contenido %}
 <h1> Resultado obtenido: </h1>
 <br>
 <div style="text-align: center;">
-<h2><span
-style="font-weight: bold; background-color: rgb(147, 206, 222);">Para la pregunta: {{pregunta.text}}</span>
-</h2>
+<h2>Para la pregunta: {{pregunta.text}}</h2>
+            <br><br>
         {%if resultado%}
-            ACERTASTE!!!
+            <h3>ACERTASTE!!!</h3>
         {%else%}
-            Te euivocaste, volvé a intentarlo!!!
+            <h3>Te equivocaste, volvé a intentarlo!!!</h3>
         {%endif%}
     <br><br><br><br>
 
@@ -21,4 +23,3 @@ style="font-weight: bold; background-color: rgb(147, 206, 222);">Para la pregunt
 </div>
 <br>
 {% endblock %}
-</body>

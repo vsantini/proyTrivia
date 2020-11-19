@@ -1,7 +1,14 @@
-{% extends 'base.html' %}
-{% block content %}
-    Pagina no encontrada!
+{% extends "base_alternativa.html" %}
+{% block head %}
+{{ super() }} {# Heredar el contenido del bloque padre #}
+<link rel="stylesheet" href="{{url_for('static',filename='css/style.css')}}">
+{% endblock %}
+
+
+{% block contenido %}
+    <p>Página no encontrada</p>
+
     <div>
-         <a href="{{ url_for('index') }}">ir a jugar a la TRIVIA</a>
+         <a href="{{ url_for('index') }}">&nbsp &nbspIr a jugar a la TRIVIA</a>
     </div>
 {% endblock %}

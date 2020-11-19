@@ -1,6 +1,9 @@
-<body>
-{% extends "base.html" %}
-{% block app_content %}
+{% extends "base_alternativa.html" %}
+{% block head %}
+{{ super() }} {# Heredar el contenido del bloque padre #}
+<link rel="stylesheet" href="{{url_for('static',filename='css/style.css')}}">
+{% endblock %}
+{% block contenido %}
 <h1> GANASTE !!!!!!!!!!!!!</h1>
 <br>
 <div style="text-align: center;">
@@ -9,10 +12,8 @@
     <br><br><br><br>
 
             <a href="/trivia/categorias">VOLVER A EMPEZAR...!!!!</a>
-      <div style="text-align:center;">
-</div>
 <br>
 </div>
 <br>
 {% endblock %}
-</body>
+
