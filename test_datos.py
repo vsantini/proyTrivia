@@ -46,9 +46,9 @@ r_Rugby1 = Respuesta(text="17",pregunta=q_Rugby,resultado=False)
 r_Rugby2 = Respuesta(text="13",pregunta=q_Rugby,resultado=False)
 r_Rugby3 = Respuesta(text="15",pregunta=q_Rugby,resultado=True)
 
-r_Tenis1 = Respuesta(text="22",pregunta=q_Rugby,resultado=False)
-r_Tenis2 = Respuesta(text="20",pregunta=q_Rugby,resultado=True)
-r_Tenis3 = Respuesta(text="15",pregunta=q_Rugby,resultado=False)
+r_Tenis1 = Respuesta(text="22",pregunta=q_Tenis,resultado=False)
+r_Tenis2 = Respuesta(text="20",pregunta=q_Tenis,resultado=True)
+r_Tenis3 = Respuesta(text="15",pregunta=q_Tenis,resultado=False)
 
 r_Imperio1 = Respuesta(text="Cuzco",pregunta=q_Imperio,resultado=True)
 r_Imperio2 = Respuesta(text="Quito",pregunta=q_Imperio,resultado=False)
