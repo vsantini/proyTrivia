@@ -6,14 +6,37 @@
 {% block contenido %}
 <h1> GANASTE !!!!!!!!!!!!!</h1>
 <br>
-<div style="text-align: center;">
-        GANASTTE!!! ACERTASTE TODAS LAS CATEGORIAS:
-    TIEMPO TOTAL: {{tiempo}}
+<h2 align="center">GANASTTE!!! ACERTASTE TODAS LAS CATEGORIAS:TIEMPO TOTAL: {{tiempo}}</h2>
     <br><br><br><br>
-
+            <div 
             <a href="/trivia/categorias">VOLVER A EMPEZAR...!!!!</a>
 <br>
+
+<h3 align="center">TABLA DE POSICIONES</h3>
+<div align="center">
+    <table align="center" border="1">
+        <tr>
+            <td>Nombre</td>
+            <td>Direccion Mail</td>
+            <td>Mejor Tiempo</td>
+        </tr>
+        {% for user in users%}
+
+        <tr>
+            <td>{{user.name}}</td>
+            <td>{{user.email}}</td>
+            <td>{{user.best_time}}</td>
+        </tr>
+         <br>
+        {% endfor %}
+    </table>
+
+
 </div>
+
+
+
+
 <br>
 {% endblock %}
 

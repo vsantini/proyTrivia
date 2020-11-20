@@ -92,7 +92,8 @@ def mostrarrespuesta(id_pregunta, id_respuesta):
             if (best_time(win_user, new_time=tiempo)):
                 win_user.best_time = tiempo
                 db.session.commit()
-                return render_template('finJuego.html', tiempo= tiempo )
+                users = User.query.all()
+                return render_template('finJuego.html', tiempo= tiempo, users=users)
     return render_template('resultado.html', pregunta = pregunta, resultado=respuesta.resultado)
 
 def best_time(user, new_time):
