@@ -1,45 +1,14 @@
-{% extends "base.html" %}
-{% block app_content %}
+
+{% extends "base_alternativa.html" %}
+{% block head %}
+{{ super() }} {# Heredar el contenido del bloque padre #}
+<link rel="stylesheet" href="{{url_for('static',filename='css/style.css')}}">
+{% endblock %}
+
+{% block contenido%}
 {% import 'bootstrap/wtf.html' as wtf %}
 <div>
-        {{ wtf.quick_form(form,form_type="horizontal", horizontal_columns=('lg', 1, 3)) }}
-    <!--
-    <form action="" method="post" novalidate>
-        {{ form.hidden_tag() }}
-        <div>
-            {{ form.username.label }}
-            {{ form.username(size=64) }}<br>
-            {% for error in form.username.errors %}
-            <span style="color: red;">{{ error }}</span>
-            {% endfor %}
-        </div>
-        <div>
-            {{ form.email.label }}
-            {{ form.email }}<br>
-            {% for error in form.email.errors %}
-            <span style="color: red;">{{ error }}</span>
-            {% endfor %}
-        </div>
-        <div>
-            {{ form.password.label }}
-            {{ form.password }}<br>
-            {% for error in form.password.errors %}
-            <span style="color: red;">{{ error }}</span>
-            {% endfor %}
-        </div>
-        <div>
-            {{ form.password2.label }}
-            {{ form.password2 }}<br>
-            {% for error in form.password2.errors %}
-            <span style="color: red;">{{ error }}</span>
-            {% endfor %}
-        </div>
-
-        <div>
-            {{ form.submit() }}
-        </div>
-    </form>
-    -->
+        {{ wtf.quick_form(form,form_type="horizontal",button_map={'submit': 'primary'} ,  horizontal_columns=('lg', 1, 3)) }}
 </div>
 {% endblock %}
 

@@ -28,7 +28,7 @@ class Pregunta(db.Model):
 class Respuesta(db.Model):
     __tablename__ = 'respuesta'
     id = db.Column(db.Integer, primary_key=True)
-    text = db.Column(db.String(255), nullable=False, unique=True)
+    text = db.Column(db.String(255), nullable=False, unique=False)
     resultado = db.Column(db.Boolean, nullable= False, unique=False)
 
     pregunta_id = db.Column(db.Integer, db.ForeignKey('pregunta.id'))

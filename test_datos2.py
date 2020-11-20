@@ -10,7 +10,7 @@ u2 = User(name='user2', email='bla2@antel.com.uy')
 u1.set_password("admin123")
 u2.set_password("bla2")
 db.session.add_all([u1, u2])
-
+#agregamos roles a los que estaban
 u3 = User.query.filter_by(email="vsantini@antel.com.uy",).first()
 u4 = User.query.filter_by(email="juan@antel.com.uy",).first()
 
