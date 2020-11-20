@@ -1,4 +1,4 @@
-from apptrivia import app
+from apptrivia import app, db
 import random, datetime
 from flask_login import LoginManager, current_user, login_user, login_required, logout_user
 
@@ -10,7 +10,6 @@ from flask import render_template, redirect, url_for, flash, request, session, j
 
 from forms.login import LoginForm
 from forms.register import RegisterForm
-
 
 # para poder usar Flask-Login
 login_manager = LoginManager(app)
@@ -89,8 +88,19 @@ def mostrarrespuesta(id_pregunta, id_respuesta):
         if todasCatOk():
             tiempo = datetime.datetime.now() - session['time']
             session['ya_gano'] = True
-            return render_template('finJuego.html', tiempo= tiempo )
+            win_user = User.get_by_id(current_user.id)
+            if (best_time(win_user, new_time=tiempo)):
+                win_user.best_time = tiempo
+                db.session.commit()
+                return render_template('finJuego.html', tiempo= tiempo )
     return render_template('resultado.html', pregunta = pregunta, resultado=respuesta.resultado)
+
+def best_time(user, new_time):
+    if (user.best_time == None or user.best_time > new_time):
+        return True
+    else:
+        return True;
+
 
 def todasCatOk():
     categorias = Categoria.query.all();

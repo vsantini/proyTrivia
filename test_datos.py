@@ -59,8 +59,8 @@ r_Emperador2 = Respuesta(text="Nerón",pregunta=q_Emperador,resultado=False)
 r_Emperador3 = Respuesta(text="Cesar Augusto",pregunta=q_Emperador,resultado=True)
 
 r_Hitler1 = Respuesta(text="Austria",pregunta=q_Hitler,resultado=True)
-r_Hitler2 = Respuesta(text="Austria",pregunta=q_Hitler,resultado=False)
-r_Hitler3 = Respuesta(text="Austria",pregunta=q_Hitler,resultado=False)
+r_Hitler2 = Respuesta(text="Alemania",pregunta=q_Hitler,resultado=False)
+r_Hitler3 = Respuesta(text="Holanda",pregunta=q_Hitler,resultado=False)
 
 #Usuarios
 q_u1 = User(name = "valeria", email = "vsantini@antel.com.uy", is_admin = True)

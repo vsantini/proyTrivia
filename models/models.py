@@ -45,7 +45,7 @@ class User(db.Model, UserMixin):
     email = db.Column(db.String(256), unique=True, nullable=False)
     password = db.Column(db.String(128), nullable=False)
     is_admin = db.Column(db.Boolean, default=False)
-    best_time = db.Column(db.Float, nullable=True, default=None)
+    best_time = db.Column(db.Interval, nullable=True, default=None)
     roles = db.relationship('Role', backref='user', lazy='dynamic')
 
     def __repr__(self):
