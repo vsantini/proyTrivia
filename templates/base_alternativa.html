@@ -24,8 +24,7 @@
            {% if current_user.is_authenticated  %}
              <span class="navbar-text">Hola {{ current_user.name }}</span>
               <a href="{{url_for('logout')}}">Cerrar Sesion </a>
-           {% else %}
-             <a class="btn btn-info" href="{{url_for('login') }}" >Iniciar sesion</a>
+
            {% endif %}
          </li>
        </ul>
